@@ -25,7 +25,9 @@ alias adb=<project path>/adb_enhanced.py
 
 And that's it!
 
-If needed, you can still bypass the selection using our good ol' `adb -s <identifier>` argument
+## Usage
+
+Just use adb the same way you were using it until now. If several devices are attached. a prompt will ask you to choose a target. If needed, you can still bypass that selection using our good ol' `adb -s <identifier>` argument.
 
 ## Options
 
