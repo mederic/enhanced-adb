@@ -5,7 +5,7 @@ $ adb ...
 adb: error: connect failed: more than one device/emulator
 ```
 
-Tired of seeing that line ? So did I! Let's replace it by:
+Tired of seeing that line? So did I! Let's replace it by:
 
 ```
 $ adb ...
@@ -27,7 +27,7 @@ And that's it!
 
 ## Usage
 
-Just use adb the same way you were using it until now. If several devices are attached. a prompt will ask you to choose a target. If needed, you can still bypass that selection using our good ol' `adb -s <identifier>` argument.
+Just use adb the same way you were using it until now. If several devices are attached, a prompt will ask you to choose a target. If needed, you can still bypass that selection using our good ol' `adb -s <identifier>` argument.
 
 ## Options
 
