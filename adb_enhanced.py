@@ -45,7 +45,14 @@ def compute_adb_path():
 def prompt_identifier(identifiers):
 	for index, identifier in enumerate(identifiers):
 		print " " + str(index) + ": " + identifier
-	return identifiers[input("Please select a device: ")]
+	print " a: all devices"
+
+	selection = raw_input("Please select a device: ")
+	print selection
+	if selection == 'a':
+		return list(identifiers)
+	else:
+		return [identifiers[int(selection)]]
 
 def main():
     try:
@@ -55,15 +62,22 @@ def main():
 			identifiers = devices()
 
 			command = [adb]
-			if (len(identifiers) > 1 and len(args) > 0 
-					and args[0] != '-s' 
-					and args[0] != 'start-server' 
-					and args[0] != 'kill-server' 
-					and args[0] != 'devices'):
-				command.append('-s')
-				command.append(prompt_identifier(identifiers))
+			if (len(identifiers) <= 1 or len(args) == 0 
+					or args[0] == '-s' 
+					or args[0] == 'start-server' 
+					or args[0] == 'kill-server' 
+					or args[0] == 'devices'):
+				subprocess.call(command + args)
+			else:
+				selected_identifiers = prompt_identifier(identifiers)
+				for target in selected_identifiers:
+					if len(selected_identifiers) > 0:
+						print target + ":"
+					device_command = list(command)
+					device_command.append('-s')
+					device_command.append(target)
+					subprocess.call(device_command + args)
 				
-			subprocess.call(command + args)
     except (KeyboardInterrupt, SystemExit):
     	print ''
 
