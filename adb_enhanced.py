@@ -57,6 +57,8 @@ def main():
 			command = [adb]
 			if (len(identifiers) > 1 and len(args) > 0 
 					and args[0] != '-s' 
+					and args[0] != 'start-server' 
+					and args[0] != 'kill-server' 
 					and args[0] != 'devices'):
 				command.append('-s')
 				command.append(prompt_identifier(identifiers))
