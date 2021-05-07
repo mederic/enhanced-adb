@@ -16,9 +16,9 @@ properties = config.defaults()
 if properties is None:
 	properties = {}
 
-def devices():
+def devices(adb):
 	result = []
-	raw_output = subprocess.Popen(['adb', 'devices'], stdout=subprocess.PIPE).communicate()[0]
+	raw_output = subprocess.Popen([adb, 'devices'], stdout=subprocess.PIPE).communicate()[0]
 	output = string.split(raw_output, '\n')[1:]
 	for output_line in output:
 		identifier = string.split(output_line, '\t')[0].strip()
@@ -59,8 +59,7 @@ def main():
 		adb = compute_adb_path()
 		if adb is not None:
 			args = sys.argv[1:]
-			identifiers = devices()
-
+			identifiers = devices(adb)
 			command = [adb]
 			if (len(identifiers) <= 1 or len(args) == 0 
 					or args[0] == '-s' 
